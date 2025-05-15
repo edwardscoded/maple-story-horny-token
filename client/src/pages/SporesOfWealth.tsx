@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion';
 import { RetroDialog } from '@/components/RetroDialog';
 import { PixelBorder } from '@/components/ui/pixel-border';
+import { ParallaxBackground } from '@/components/ParallaxBackground';
+import sporesOfWealthBg from '../assets/images/backgrounds/spores_of_wealth_bg.png';
 
 export default function SporesOfWealth() {
   return (
-    <section className="relative min-h-screen px-4 py-16 bg-forestGreen text-beige">
+    <ParallaxBackground
+      imageUrl={sporesOfWealthBg}
+      className="px-4 py-16 min-h-screen text-beige"
+      opacity={0.9}
+    >
       <div className="container mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -96,6 +102,6 @@ export default function SporesOfWealth() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </ParallaxBackground>
   );
 }
