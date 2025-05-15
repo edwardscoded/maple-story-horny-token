@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { PixelButton } from '@/components/PixelButton';
 import { RetroDialog } from '@/components/RetroDialog';
@@ -6,12 +6,114 @@ import { ParallaxBackground } from '@/components/ParallaxBackground';
 import { PixelBorder } from '@/components/ui/pixel-border';
 import { useHornyPrice } from '@/hooks/useHornyPrice';
 
+// Typing animation custom hook
+function useTypingAnimation(texts: string[], typingSpeed = 40, delayBetweenTexts = 500) {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
+  const currentCharIndex = useRef(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Toggle cursor effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+    
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  // Typing effect
+  useEffect(() => {
+    if (!isTyping || currentTextIndex >= texts.length) return;
+    
+    const currentFullText = texts[currentTextIndex];
+    
+    if (currentCharIndex.current < currentFullText.length) {
+      timeoutRef.current = setTimeout(() => {
+        setDisplayedText(prev => prev + currentFullText[currentCharIndex.current]);
+        currentCharIndex.current += 1;
+      }, typingSpeed);
+      
+      return () => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      };
+    } else {
+      // Text completed, move to next after delay
+      timeoutRef.current = setTimeout(() => {
+        if (currentTextIndex < texts.length - 1) {
+          setCurrentTextIndex(prev => prev + 1);
+          setDisplayedText('');
+          currentCharIndex.current = 0;
+        } else {
+          setIsTyping(false);
+        }
+      }, delayBetweenTexts);
+      
+      return () => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      };
+    }
+  }, [displayedText, currentTextIndex, isTyping, texts, typingSpeed, delayBetweenTexts]);
+  
+  return { displayedText, showCursor, isTyping, currentTextIndex };
+}
+
 export default function ForestGate() {
   const { price, change, loading, error } = useHornyPrice();
+  const [showConversation, setShowConversation] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  
+  // Define conversation texts
+  const conversationTexts = [
+    "Welcome to the Horny Forest, traveler! I'm Shroomy, your guide to this mystical realm of kawaii creatures and degen opportunities.",
+    "The prophecy speaks of great wealth for those who HODL the sacred $HORNY token through the next bull market...",
+    "Let me show you around our community and the incredible tokenomics of $HORNY."
+  ];
+  
+  const { displayedText, showCursor, isTyping, currentTextIndex } = useTypingAnimation(
+    conversationTexts, 
+    30, // typing speed in ms
+    1000 // delay between texts in ms
+  );
+  
+  // Start conversation when component mounts
+  useEffect(() => {
+    // Small delay before starting the conversation
+    const timer = setTimeout(() => {
+      setShowConversation(true);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
+  // Show content after conversation finishes or after a timeout
+  useEffect(() => {
+    if (!isTyping && currentTextIndex === conversationTexts.length - 1) {
+      // Conversation finished, show content after delay
+      const timer = setTimeout(() => {
+        setShowContent(true);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isTyping, currentTextIndex, conversationTexts.length]);
+  
+  // Fallback to show content after 15 seconds
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      if (!showContent) {
+        setShowContent(true);
+      }
+    }, 15000);
+    
+    return () => clearTimeout(fallbackTimer);
+  }, [showContent]);
   
   return (
     <ParallaxBackground
-      imageUrl="https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080"
+      imageUrl="/src/assets/images/forest_gate_bg.png"
       className="px-4 py-16"
     >
       <div className="container mx-auto relative z-10">
@@ -26,17 +128,40 @@ export default function ForestGate() {
         </motion.div>
         
         <div className="max-w-4xl mx-auto">
-          <RetroDialog className="mb-8" withAnimation>
-            <p className="font-body text-xl mb-4">"Welcome to the Horny Forest, traveler! I'm Shroomy, your guide to this mystical realm of kawaii creatures and degen opportunities."</p>
-            <p className="font-body text-xl">The prophecy speaks of great wealth for those who HODL the sacred $HORNY token through the next bull market...</p>
-          </RetroDialog>
+          {/* Typing animation dialog */}
+          {showConversation && (
+            <RetroDialog className="mb-8" withAnimation variant="light">
+              <div className="min-h-[120px]">
+                <p className="font-body text-xl">
+                  "{displayedText}
+                  {showCursor && <span className="animate-pulse">|</span>}
+                </p>
+              </div>
+              
+              {/* Skip button - only shows while typing is happening */}
+              {isTyping && (
+                <div className="text-right mt-4">
+                  <button 
+                    className="text-sm text-darkBrown opacity-70 hover:opacity-100 transition-opacity"
+                    onClick={() => {
+                      setShowContent(true);
+                    }}
+                  >
+                    [Skip →]
+                  </button>
+                </div>
+              )}
+            </RetroDialog>
+          )}
           
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
-          >
+          {/* Content appears after conversation completes */}
+          {showContent && (
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
+            >
             {/* Price Chart */}
             <PixelBorder>
               <h3 className="font-pixel text-darkBrown text-lg mb-4">$HORNY Price</h3>
@@ -95,6 +220,7 @@ export default function ForestGate() {
               </div>
             </PixelBorder>
           </motion.div>
+          )}
         </div>
       </div>
     </ParallaxBackground>
