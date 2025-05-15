@@ -118,26 +118,27 @@ export const AnimalCrossingDialog: React.FC<AnimalCrossingDialogProps> = ({
   
   return (
     <div className={`relative ${className}`}>
-      {/* Main dialog box */}
+      {/* Main dialog box - Animal Crossing style */}
       <div className="bg-white border-4 border-brown rounded-xl p-6 shadow-lg relative">
         {/* Character info section - top of dialog */}
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-4 bg-[#f8f4e3] p-2 rounded-lg border-2 border-brown">
           {characterImage && (
-            <div className="w-12 h-12 rounded-full overflow-hidden mr-3 bg-green-100 flex-shrink-0">
+            <div className="w-20 h-20 overflow-hidden mr-3 bg-transparent flex-shrink-0">
               <img 
                 src={characterImage} 
                 alt={characterName} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           )}
-          <div className="font-pixel text-lg text-avaxRed">{characterName}</div>
+          <div className="font-pixel text-xl text-[#9e5e3b]">{characterName}</div>
         </div>
         
-        {/* Message text area */}
+        {/* Message text area - Animal Crossing style */}
         <div 
           ref={messageRef}
-          className="font-pixel text-xl text-darkBrown leading-relaxed min-h-[100px] max-h-[150px] overflow-y-auto pr-2"
+          className="font-pixel text-xl text-[#55453a] leading-relaxed min-h-[120px] max-h-[150px] overflow-y-auto pr-2 bg-[#f8f4e3] p-4 rounded-lg border-2 border-brown"
+          style={{ letterSpacing: '0.5px' }}
         >
           {displayedText}
         </div>
