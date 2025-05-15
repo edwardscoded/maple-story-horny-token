@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RetroDialog } from '@/components/RetroDialog';
 import { ParallaxBackground } from '@/components/ParallaxBackground';
+import sacredTreeBg from '../assets/images/backgrounds/sacred_tree_bg.png';
 
 export default function SacredTree() {
   const [activeChapter, setActiveChapter] = useState(0);
@@ -39,9 +40,9 @@ export default function SacredTree() {
   
   return (
     <ParallaxBackground
-      imageUrl="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080"
-      className="px-4 py-16 bg-darkBrown text-beige"
-      opacity={0.4}
+      imageUrl={sacredTreeBg}
+      className="px-4 py-16 min-h-screen text-beige"
+      opacity={0.9}
     >
       <div className="container mx-auto relative z-10">
         <motion.div 
