@@ -63,7 +63,15 @@ export default function Layout({ children }: LayoutProps) {
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
             <div className={`font-pixel ${scrolled ? 'text-avaxRed' : 'text-avaxRed'} text-lg`}>
-              $HORNY
+              <span className="relative">
+                <span className="animate-bounce inline-block">$</span>
+                <span className="text-pink-500">H</span>
+                <span className="text-yellow-400">O</span>
+                <span className="text-blue-400">R</span>
+                <span className="text-purple-400">N</span>
+                <span className="text-green-400">Y</span>
+                <span className="absolute -top-1 -right-2 text-xs animate-pulse">♡</span>
+              </span>
             </div>
           </Link>
 
@@ -88,7 +96,15 @@ export default function Layout({ children }: LayoutProps) {
               rel="noopener noreferrer"
               className={`font-pixel text-xs py-1 px-3 bg-avaxRed text-white hover:bg-opacity-90 shadow-md transition-all`}
             >
-              BUY $HORNY
+              BUY <span className="inline-flex items-center">
+                <span className="text-yellow-300">$</span>
+                <span className="text-pink-300">H</span>
+                <span>O</span>
+                <span className="text-purple-300">R</span>
+                <span>N</span>
+                <span className="text-green-300">Y</span>
+                <span className="ml-1">♡</span>
+              </span>
             </a>
           </div>
 
@@ -155,7 +171,17 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-8 md:mb-0 text-center md:text-left">
               <h2 className="font-pixel text-avaxRed text-xl mb-2">Maple Story</h2>
-              <p className="font-rpg text-2xl">$HORNY</p>
+              <p className="font-rpg text-2xl">
+                <span className="inline-flex items-center">
+                  <span className="animate-bounce inline-block">$</span>
+                  <span className="text-pink-500">H</span>
+                  <span className="text-yellow-400">O</span>
+                  <span className="text-blue-400">R</span>
+                  <span className="text-purple-400">N</span>
+                  <span className="text-green-400">Y</span>
+                  <span className="ml-1">✧*˖⁺˖ᐟ</span>
+                </span>
+              </p>
               <p className="font-body mt-2 text-sm text-gray-400">The Kawaii Meme Coin of AVAX</p>
             </div>
             
