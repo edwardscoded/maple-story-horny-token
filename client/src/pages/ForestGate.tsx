@@ -5,6 +5,7 @@ import { ParallaxBackground } from '@/components/ParallaxBackground';
 import { PixelBorder } from '@/components/ui/pixel-border';
 import { useHornyPrice } from '@/hooks/useHornyPrice';
 import { AnimalCrossingDialog } from '@/components/AnimalCrossingDialog';
+import shroomyImage from '../assets/images/characters/shroomy.png';
 
 export default function ForestGate() {
   const { price, change, loading, error } = useHornyPrice();
@@ -61,7 +62,7 @@ export default function ForestGate() {
             >
               <AnimalCrossingDialog
                 messages={conversationMessages}
-                characterImage="/images/characters/shroomy.png"
+                characterImage={shroomyImage}
                 characterName="Shroomy"
                 onComplete={handleDialogComplete}
                 typingSpeed={40}
