@@ -5,13 +5,11 @@ import { ParallaxBackground } from '@/components/ParallaxBackground';
 import { PixelBorder } from '@/components/ui/pixel-border';
 import { useHornyPrice } from '@/hooks/useHornyPrice';
 import { AnimalCrossingDialog } from '@/components/AnimalCrossingDialog';
-import { ShroomyCharacter } from '@/components/ShroomyCharacter';
 
 export default function ForestGate() {
   const { price, change, loading, error } = useHornyPrice();
   const [showConversation, setShowConversation] = useState(false);
   const [showContent, setShowContent] = useState(false);
-  const [shroomyCharacterSvg, setShroomyCharacterSvg] = useState<string>('');
   
   // Define conversation messages in Animal Crossing style
   const conversationMessages = [
@@ -20,16 +18,6 @@ export default function ForestGate() {
     "Let me show you around our community and the incredible tokenomics of $HORNY.",
     "We're going to make it, fren!"
   ];
-  
-  // Generate the Shroomy character SVG as a data URL
-  useEffect(() => {
-    const svgElement = document.createElement('div');
-    svgElement.innerHTML = '<svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="#3C7DD9" /><circle cx="50" cy="50" r="35" fill="#4E8FE8" /><path d="M50 10 L55 25 L45 25 Z" fill="#2C5AA0" /><path d="M80 30 L65 40 L70 25 Z" fill="#2C5AA0" /><path d="M90 50 L75 50 L80 40 Z" fill="#2C5AA0" /><path d="M80 70 L65 60 L70 75 Z" fill="#2C5AA0" /><path d="M50 90 L55 75 L45 75 Z" fill="#2C5AA0" /><path d="M20 70 L35 60 L30 75 Z" fill="#2C5AA0" /><path d="M10 50 L25 50 L20 40 Z" fill="#2C5AA0" /><path d="M20 30 L35 40 L30 25 Z" fill="#2C5AA0" /><path d="M35 65 C35 75, 65 75, 65 65 L63 85 C63 92, 37 92, 37 85 Z" fill="#F0EAD6" /><circle cx="42" cy="50" r="5" fill="#000" /><circle cx="58" cy="50" r="5" fill="#000" /><circle cx="44" cy="48" r="2" fill="#FFF" /><circle cx="60" cy="48" r="2" fill="#FFF" /><path d="M45 60 Q50 65 55 60" stroke="#000" stroke-width="2" stroke-linecap="round" /></svg>';
-    
-    const svgString = svgElement.innerHTML;
-    const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
-    setShroomyCharacterSvg(dataUrl);
-  }, []);
   
   // Start conversation when component mounts
   useEffect(() => {
@@ -73,7 +61,7 @@ export default function ForestGate() {
             >
               <AnimalCrossingDialog
                 messages={conversationMessages}
-                characterImage={shroomyCharacterSvg}
+                characterImage="/images/characters/shroomy.png"
                 characterName="Shroomy"
                 onComplete={handleDialogComplete}
                 typingSpeed={40}
