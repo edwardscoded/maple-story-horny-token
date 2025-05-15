@@ -1,0 +1,183 @@
+Product Requirements Document
+Project: Maple Story — $HORNY Meme Coin on AVAX
+Version: 2.0
+Date: May 15, 2025  
+1. Overview
+Maple Story is a kawaii meme coin on the Avalanche (AVAX) blockchain, inspired by the cozy nostalgia of early RPGs like MapleStory. Set in a whimsical Maple Forest filled with adorable mushroom friends, $HORNY is a playful token that celebrates cuteness, memes, and community spirit. The website is the heart of the project, fostering a joyful, meme-loving community united by nostalgia and the dream of a “cute pump.”
+Blockchain: Avalanche (AVAX)  
+
+Token Ticker: $HORNY  
+
+Objective: Create a charming, meme-driven community hub that feels like a cozy RPG village, with cute graphics and viral appeal.
+2. Target Audience
+Meme coin fans on AVAX seeking wholesome, fun projects  
+
+Fans of kawaii aesthetics and nostalgic games (e.g., MapleStory)  
+
+Social media users who love sharing cute stickers and GIFs  
+
+Crypto newcomers drawn to playful, community-driven tokens
+3. Design Requirements
+ Aesthetic
+Color Palette: AVAX Red (#E84142), pastel pink (#FFD1DC), soft beige (#F5E8C7), and baby blue (#AEC6CF) for a warm, inviting look.  
+
+Typography: Rounded, pixel-inspired fonts (e.g., PixelMplus, Dogica) or hand-drawn styles (e.g., Comic Neue) for a cute RPG vibe.  
+
+Mascot: A chibi blue mushroom named “Horny Shroom,” with big sparkly eyes, a tiny maple leaf hat, and a constant blush.  
+
+Layout: Smooth scrolling with rounded edges, heart-shaped hover effects, and sparkly animations to evoke a magical forest.
+ Cute Graphics
+Chibi mushroom characters with oversized heads, tiny bodies, and expressive faces (e.g., winking, giggling, or hugging maple leaves).  
+
+Animated pastel sparkles and heart particles floating across the screen.  
+
+Red maple leaves with smiley faces, gently falling or bouncing.  
+
+Meme-ready stickers and GIFs featuring Horny Shroom in cute scenarios (e.g., sipping boba, riding a unicorn).
+4. Core Pages & Features
+ Home (Maple Village Square)
+Intro Animation: Horny Shroom bounces out, waving a maple leaf flag, with text: “Welcome to the Cutest Forest on AVAX!”  
+
+Real-time $HORNY price and chart (via DexScreener API), displayed in a heart-shaped frame.  
+
+“Join the Cute Pump!” CTA button linking to TraderJoe (AVAX DEX).  
+
+Graphics: Pastel forest background with chibi mushrooms dancing and sparkly heart particles.
+ Lore Page (The Maple Storybook)
+Interactive, scroll-based story with flipbook-style animations:  
+Horny Shroom’s origin as the forest’s shyest mushroom, dreaming of a big pump.  
+
+The Great Maple Party, where mushrooms unite for cuteness and crypto glory.  
+
+The Legend of the Sparkle HODLers, who never sell their $HORNY.
+Graphics: Watercolor-style illustrations of mushrooms holding hands, with pastel pink and beige trees.
+ Community Page (The Shroomie Hangout)
+Embedded X feed and Telegram link, styled like a cute chat bubble.  
+
+Gallery of shareable memes and stickers (e.g., Horny Shroom saying “HODL 4EVA!”).  
+
+“Shroomie Starboard”: A leaderboard of top $HORNY holders with chibi avatars.  
+
+Graphics: A picnic scene with mushrooms sharing boba and maple cookies.
+ Tokenomics Page (The Maple Treasure Tree)
+Breakdown of:  
+Total token supply (e.g., 1T $HORNY).  
+
+Liquidity pool and burn plans (e.g., 5% burned per milestone).  
+
+No tax to keep it “shroomie-friendly.”
+Animated tree that grows pastel pink leaves as $HORNY’s market cap rises.  
+
+Graphics: Horny Shroom watering the tree with a sparkly watering can.
+ Tech Page (The Shroomie Workshop)
+$HORNY contract address and audit links (if available).  
+
+Why AVAX? “Fast, cheap, and as cool as a snowy maple forest!”  
+
+Graphics: A pixel-art workshop with mushrooms crafting $HORNY coins on tiny workbenches.
+ Easter Egg
+Clicking Horny Shroom’s hat 10 times spawns a “Cute Shroomie Surprise”: a shower of heart-shaped confetti and a downloadable sticker pack.  
+
+No NSFW elements; keeps the vibe wholesome and cute.
+5. Technical Stack
+Frontend: Next.js for smooth animations and fast loading.  
+
+Backend: Serverless (Vercel) for scalability.  
+
+Styling: TailwindCSS with custom kawaii components (e.g., rounded buttons, sparkly borders).  
+
+Blockchain: Avalanche C-Chain for $HORNY token integration.  
+
+APIs:  
+Price/Chart: DexScreener or CoinGecko.  
+
+Social: X API for community feed.
+Graphics Tools: Use Figma for designing chibi assets or Pixilart for pixel-art elements.
+6. User Flow
+User lands on homepage → Horny Shroom greets with a bouncy animation and falling smiley maple leaves.  
+
+“Read the Cute Story” CTA starts the lore scroll, with flipbook animations.  
+
+Story reveals the wholesome Shroomie cult and invites users to join.  
+
+CTAs prompt joining Telegram, buying $HORNY, or downloading memes.  
+
+Easter egg and sparkly interactions keep users engaged.
+7. Success Metrics
+Traffic: 15,000+ website visits in the first month.  
+
+Holders: 7,000+ $HORNY wallet holders.  
+
+Social Reach: 2M+ impressions on X via cute memes and stickers.  
+
+Community Buzz: At least one viral X thread or fan-made Shroomie animation.
+8. Optional Features
+Shroomie NFT Collection: Mint chibi mushroom NFTs that gain accessories (e.g., sunglasses, boba cups) as users HODL $HORNY.  
+
+Cuteness Score: A gamified score that rises with holding time, unlocking exclusive stickers.  
+
+Maple Party Game: A simple in-site game where users collect falling maple leaves to earn “Shroomie Points” (non-token rewards).
+9. Cute Graphics Specifications
+Chibi Mushroom Mascot (Horny Shroom)  
+Appearance: Blue mushroom with a tiny maple leaf hat, huge sparkly eyes, and a permanent blush. Wears a pastel pink scarf.  
+
+Animation: Bounces softly, occasionally winking or blowing heart bubbles.  
+
+Format: PNG (static) and GIF (animated), 500x500px for web use.
+Smiley Maple Leaves  
+Appearance: Red maple leaves (#E84142) with tiny smiley faces and googly eyes.  
+
+Animation: Fall gently with a slight spin, some winking as they descend.  
+
+Format: SVG for smooth web animation, 100x100px.
+Pastel Forest Background  
+Appearance: Pixel-art forest with beige trees, pastel pink clouds, and baby blue streams. Chibi mushrooms nap under trees.  
+
+Details: Heart-shaped bushes and sparkly fireflies for charm.  
+
+Format: JPG, 1920x1080px, optimized for parallax scrolling.
+Meme Stickers/GIFs  
+Appearance: 5–10 Horny Shroom variants (e.g., holding a $HORNY coin, wearing a crown, or sipping boba). Text like “Cute HODL!” or “Shroomie Vibes.”  
+
+Format: PNG (150x150px) and GIF (3-second loops).
+Tokenomics Tree  
+Appearance: A chibi tree with a beige trunk and pastel pink leaves, surrounded by cheering mushrooms.  
+
+Animation: Leaves sprout as market cap grows, with sparkles.  
+
+Format: SVG for dynamic scaling, 800x600px.
+10. Notes
+Cuteness Priority: All graphics must feel wholesome and kawaii, avoiding any suggestive or NSFW vibes. Focus on sparkles, pastels, and expressive characters.  
+
+Meme Appeal: Stickers and GIFs should be optimized for X and Telegram sharing, with short, catchy phrases.  
+
+Mobile Optimization: Ensure animations (e.g., falling leaves) are lightweight for smooth performance on mobile devices.  
+
+Inspiration: Draw from games like Animal Crossing or Paw Patrol for cozy, cute vibes, and meme coins like Dogecoin for viral appeal.
+Changes Made
+Tone Shift: Replaced “degenerate” and NSFW elements with wholesome, kawaii language (e.g., “Horny Forest” → “Maple Village Square”).  
+
+Color Palette: Added pastel pink and baby blue to soften the AVAX red and beige, enhancing cuteness.  
+
+Graphics: Emphasized chibi mushrooms with sparkly eyes, smiley maple leaves, and heart-shaped effects. Removed suggestive elements.  
+
+Typography: Switched to rounded, playful fonts like PixelMplus for a cozier feel.  
+
+Features: Simplified the easter egg to a cute surprise, added a game and NFT ideas to boost engagement.  
+
+Metrics: Increased targets to reflect a viral, cute meme coin’s potential.
+Image Sourcing & Creation
+To bring the cute graphics to life:
+Sourcing: Use Canva’s kawaii templates for backgrounds or Etsy’s chibi clipart for mushroom bases. Customize with pastel colors.  
+
+Creation: Hire a pixel artist on Fiverr for Horny Shroom and forest assets, or use Pixilart for DIY pixel art.  
+
+Generated Images: If you want me to generate images (e.g., Horny Shroom, smiley leaves), please confirm with “Generate the images” and specify which ones. I can create PNGs or GIFs tailored to the PRD.
+Next Steps
+Confirm Image Needs: Let me know if you want generated images, sourced assets, or more detailed graphic specs.  
+
+Feedback: If the cute vibe needs further tweaks (e.g., more sparkles, specific meme styles), share details.  
+
+Meme Trends: I can search X for recent kawaii meme coin visuals to refine the aesthetic—let me know if this is needed.
+This PRD now radiates cuteness while keeping the meme coin energy. Let me know how to proceed!
+

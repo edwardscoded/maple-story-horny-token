@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 45 41% 92%;
+  --foreground: 20 43% 15%;
+  
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  
+  --popover: 45 41% 92%;
+  --popover-foreground: 20 43% 15%;
+  
+  --card: 45 41% 92%;
+  --card-foreground: 20 43% 15%;
+  
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  
+  --primary: 359 81% 58%;
+  --primary-foreground: 60 9.1% 97.8%;
+  
+  --secondary: 142 36% 28%;
+  --secondary-foreground: 60 9.1% 97.8%;
+  
+  --accent: 45 41% 92%;
+  --accent-foreground: 20 43% 15%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  
+  --ring: 20 14.3% 4.1%;
+  
+  --radius: 0.5rem;
+  
+  /* App-specific colors */
+  --avaxRed: 359 81% 58%;
+  --forestGreen: 142 36% 28%;
+  --mushroomPink: 339 100% 86%;
+  --beige: 45 41% 92%;
+  --darkBrown: 25 43% 15%;
+}
+
+.dark {
+  --background: 25 35% 10%;
+  --foreground: 45 41% 92%;
+  
+  --muted: 0 0% 15%;
+  --muted-foreground: 240 5% 64.9%;
+  
+  --popover: 25 35% 10%;
+  --popover-foreground: 45 41% 92%;
+  
+  --card: 25 35% 10%;
+  --card-foreground: 45 41% 92%;
+  
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  
+  --primary: 359 81% 58%;
+  --primary-foreground: 60 9.1% 97.8%;
+  
+  --secondary: 142 36% 28%;
+  --secondary-foreground: 60 9.1% 97.8%;
+  
+  --accent: 25 35% 10%;
+  --accent-foreground: 45 41% 92%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-beige text-darkBrown font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-pixel;
+  }
+}
+
+@layer components {
+  .pixel-border {
+    @apply border-4 border-darkBrown relative;
+    box-shadow: 4px 4px 0 rgba(61, 40, 23, 0.8);
+  }
+
+  .section-title {
+    @apply font-pixel text-avaxRed text-2xl md:text-3xl mb-4 text-center;
+  }
+
+  .section-divider {
+    @apply w-24 h-1 bg-avaxRed mx-auto mb-8;
+  }
+
+  .parallax-forest {
+    @apply absolute inset-0 z-0 bg-fixed bg-center bg-no-repeat bg-cover opacity-60;
+  }
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Special animations */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s infinite;
+}
+
+.animate-leaf-fall {
+  animation: leaf-fall 15s linear infinite;
+}
+
+/* Utility classes */
+.bg-avaxRed {
+  @apply bg-[#E84142];
+}
+
+.text-avaxRed {
+  @apply text-[#E84142];
+}
+
+.bg-forestGreen {
+  @apply bg-[#2A623D];
+}
+
+.text-forestGreen {
+  @apply text-[#2A623D];
+}
+
+.bg-mushroomPink {
+  @apply bg-[#FF9CC0];
+}
+
+.text-mushroomPink {
+  @apply text-[#FF9CC0];
+}
+
+.bg-beige {
+  @apply bg-[#F5F0E1];
+}
+
+.text-beige {
+  @apply text-[#F5F0E1];
+}
+
+.bg-darkBrown {
+  @apply bg-[#3D2817];
+}
+
+.text-darkBrown {
+  @apply text-[#3D2817];
+}
+
+.font-pixel {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.font-body {
+  font-family: 'VT323', monospace;
+}
+
+.font-rpg {
+  font-family: 'UnifrakturCook', fantasy;
+}
