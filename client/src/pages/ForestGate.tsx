@@ -14,10 +14,14 @@ export default function ForestGate() {
   
   // Define conversation messages in Animal Crossing style
   const conversationMessages = [
-    "Welcome to the Horny Forest, traveler! I'm Shroomy, your guide to this mystical realm of kawaii creatures and degen opportunities.",
-    "The prophecy speaks of great wealth for those who HODL the sacred $HORNY token through the next bull market...",
-    "Let me show you around our community and the incredible tokenomics of $HORNY.",
-    "We're going to make it, fren!"
+    "Hello there, wanderer! *boing* I'm Shroomy, guardian of this magical forest and mascot of the $HORNY token!",
+    "Welcome to the Forest Gate! *bounce* This is where all the fun-gis hang out, hehe! Get it? Fun-guys? Fungi? *giggle*",
+    "Our $HORNY tokens grow wild here, just like me! They're the most magical mushrooms in all of the AVAX chain!",
+    "The Sacred Tree ahead holds ancient wisdom... and maybe some sick gains too! The markets have been REALLY fun lately!",
+    "Over at the Mushroom Circle, you'll find our top holders. Those guys have, like, TONS of $HORNY! Super impressive!",
+    "Make sure to check out the Spores of Wealth! That's where all the juicy tokenomics live. Supply, demand, all that jazz!",
+    "And if you want to meet other $HORNY enthusiasts, the Fungus Framework is our mega-cool community hub!",
+    "What are you waiting for? Let's go explore! And remember: Stay $HORNY, stay happy! *wiggle dance*"
   ];
   
   // Start conversation when component mounts
@@ -38,7 +42,7 @@ export default function ForestGate() {
   return (
     <ParallaxBackground
       imageUrl="/src/assets/images/forest_gate_bg.png"
-      className="px-4 py-16"
+      className="px-4 py-16 min-h-screen"
     >
       <div className="container mx-auto relative z-10">
         <motion.div 

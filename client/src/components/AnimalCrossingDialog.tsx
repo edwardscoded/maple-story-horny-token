@@ -119,7 +119,11 @@ export const AnimalCrossingDialog: React.FC<AnimalCrossingDialogProps> = ({
   return (
     <div className={`relative ${className}`}>
       {/* Main dialog box - Animal Crossing style */}
-      <div className="bg-white border-4 border-brown rounded-xl p-6 shadow-lg relative">
+      <div className="bg-white border-4 border-brown rounded-xl p-6 shadow-lg relative" 
+        style={{
+          backgroundImage: 'linear-gradient(to bottom, #ffffff, #f8f4e3)',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1)'
+        }}>
         {/* Character info section - top of dialog */}
         <div className="flex items-center mb-4 bg-[#f8f4e3] p-2 rounded-lg border-2 border-brown">
           {characterImage && (
@@ -157,7 +161,7 @@ export const AnimalCrossingDialog: React.FC<AnimalCrossingDialogProps> = ({
           {isTyping ? (
             <button 
               onClick={handleSkip}
-              className="font-pixel text-sm bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-lg text-darkBrown transition-colors"
+              className="font-pixel text-sm bg-[#eadfb4] hover:bg-[#d8c99e] px-3 py-1 rounded-lg text-[#55453a] transition-colors border-2 border-[#a39170]"
             >
               Skip
             </button>
@@ -167,7 +171,7 @@ export const AnimalCrossingDialog: React.FC<AnimalCrossingDialogProps> = ({
               animate={{ scale: 1 }}
               transition={{ repeat: Infinity, repeatType: "reverse", duration: 0.5 }}
               onClick={handleNext}
-              className="font-pixel text-sm bg-avaxRed hover:bg-red-600 px-4 py-1 rounded-lg text-white transition-colors"
+              className="font-pixel text-sm bg-[#97d490] hover:bg-[#7fc178] px-4 py-1 rounded-lg text-white transition-colors border-2 border-[#65a05e]"
             >
               {currentMessageIndex < messages.length - 1 ? "Next" : "Close"}
             </motion.button>
