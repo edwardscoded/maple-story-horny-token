@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PixelButton } from '@/components/PixelButton';
-import { useHornyPrice } from '@/hooks/useHornyPrice';
 
 export default function Home() {
   const [clickCount, setClickCount] = useState(0);
   const [showAchievement, setShowAchievement] = useState(false);
-  const { price, change, loading } = useHornyPrice();
   
   // Handle mascot click for easter egg
   const handleMascotClick = () => {
@@ -70,23 +68,6 @@ export default function Home() {
           <span className="absolute top-0 right-0 bg-avaxRed text-white font-pixel text-xs px-2 py-1 rounded-full">
             {clickCount}/69
           </span>
-        )}
-      </div>
-      
-      {/* Price display in center of screen */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 p-6 rounded-lg bg-white bg-opacity-80 backdrop-blur-sm shadow-lg">
-        {loading ? (
-          <div className="text-center animate-pulse">
-            <p className="font-pixel text-xl text-darkBrown">Loading price...</p>
-          </div>
-        ) : (
-          <div className="text-center">
-            <h3 className="font-pixel text-xl text-darkBrown mb-2">$HORNY Price</h3>
-            <p className="font-rpg text-2xl md:text-3xl mb-1">{price || "Price unavailable"}</p>
-            <p className={`font-pixel ${change && parseFloat(change) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {change ? `${change}% (24h)` : "N/A"}
-            </p>
-          </div>
         )}
       </div>
       
