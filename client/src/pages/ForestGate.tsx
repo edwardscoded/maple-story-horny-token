@@ -61,7 +61,7 @@ export default function ForestGate() {
             >
               <AnimalCrossingDialog
                 messages={conversationMessages}
-                characterImage="/shroomy.png"
+                characterImage="/images/characters/shroomy.png"
                 characterName="Shroomy"
                 onComplete={handleDialogComplete}
                 typingSpeed={40}
