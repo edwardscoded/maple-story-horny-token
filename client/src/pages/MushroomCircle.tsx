@@ -80,31 +80,18 @@ export default function MushroomCircle() {
             {/* Community Memes */}
             <PixelBorder>
               <h3 className="font-pixel text-darkBrown text-lg mb-4">Meme Shrine</h3>
-              <div className="grid grid-cols-2 gap-4">
-                {/* A humorous meme showing mushroom characters in a trading scenario */}
-                <img 
-                  src="https://pixabay.com/get/gbce1c3cec4e31c8dd733bea3d1076dde33c400146d0afbb9b86e44781087fb40cf9226ee69c0e3cc38b842af1de609692781db0736f09cca32e8b13c52b308c1_1280.jpg" 
-                  alt="Community meme" 
-                  className="w-full h-40 object-cover" 
-                />
-                {/* A meme showing a surprised mushroom looking at price charts */}
-                <img 
-                  src="https://images.unsplash.com/photo-1612404730960-5c71577fca11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=300" 
-                  alt="Community meme" 
-                  className="w-full h-40 object-cover" 
-                />
-                {/* A meme about diamond hands with mushroom characters */}
-                <img 
-                  src="https://pixabay.com/get/gf48a429e465f31f82e9b8af9cc60a8d31c874700204be263a8e731bfd4c87a773b90ed6de2f27ffa2562f8d839d74390c77fb53c243dcb07f91479035d97f251_1280.jpg" 
-                  alt="Community meme" 
-                  className="w-full h-40 object-cover" 
-                />
-                {/* A meme showing mushrooms on the moon */}
-                <img 
-                  src="https://pixabay.com/get/g787d75bec2eb496740ddb6da5d67a2cd010824fa8e77a7efa035d947f70f21fda26eb3916d09493e9d16c3eeb2fb7013d237cede687305b7d3e951034fa1c5c8_1280.jpg" 
-                  alt="Community meme" 
-                  className="w-full h-40 object-cover" 
-                />
+              <div className="p-6 text-center">
+                <div className="bg-white p-8 rounded-lg border-2 border-dashed border-gray-300 mb-4">
+                  <h4 className="font-pixel text-avaxRed text-lg mb-4">Submit Your Memes</h4>
+                  <p className="text-gray-600 mb-4">
+                    Share your best $HORNY token memes with the community
+                  </p>
+                  <div className="flex justify-center">
+                    <div className="mt-2 text-sm text-gray-500">
+                      Community submissions will appear here
+                    </div>
+                  </div>
+                </div>
               </div>
               <PixelButton href="#" size="full" className="mt-4">Download Assets</PixelButton>
             </PixelBorder>
