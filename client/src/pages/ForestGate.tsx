@@ -1,82 +1,35 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { PixelButton } from '@/components/PixelButton';
-import { RetroDialog } from '@/components/RetroDialog';
 import { ParallaxBackground } from '@/components/ParallaxBackground';
 import { PixelBorder } from '@/components/ui/pixel-border';
 import { useHornyPrice } from '@/hooks/useHornyPrice';
-
-// Typing animation custom hook
-function useTypingAnimation(texts: string[], typingSpeed = 40, delayBetweenTexts = 500) {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
-  const [showCursor, setShowCursor] = useState(true);
-  const currentCharIndex = useRef(0);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Toggle cursor effect
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 500);
-    
-    return () => clearInterval(cursorInterval);
-  }, []);
-
-  // Typing effect
-  useEffect(() => {
-    if (!isTyping || currentTextIndex >= texts.length) return;
-    
-    const currentFullText = texts[currentTextIndex];
-    
-    if (currentCharIndex.current < currentFullText.length) {
-      timeoutRef.current = setTimeout(() => {
-        setDisplayedText(prev => prev + currentFullText[currentCharIndex.current]);
-        currentCharIndex.current += 1;
-      }, typingSpeed);
-      
-      return () => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      };
-    } else {
-      // Text completed, move to next after delay
-      timeoutRef.current = setTimeout(() => {
-        if (currentTextIndex < texts.length - 1) {
-          setCurrentTextIndex(prev => prev + 1);
-          setDisplayedText('');
-          currentCharIndex.current = 0;
-        } else {
-          setIsTyping(false);
-        }
-      }, delayBetweenTexts);
-      
-      return () => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      };
-    }
-  }, [displayedText, currentTextIndex, isTyping, texts, typingSpeed, delayBetweenTexts]);
-  
-  return { displayedText, showCursor, isTyping, currentTextIndex };
-}
+import { AnimalCrossingDialog } from '@/components/AnimalCrossingDialog';
+import { ShroomyCharacter } from '@/components/ShroomyCharacter';
 
 export default function ForestGate() {
   const { price, change, loading, error } = useHornyPrice();
   const [showConversation, setShowConversation] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [shroomyCharacterSvg, setShroomyCharacterSvg] = useState<string>('');
   
-  // Define conversation texts
-  const conversationTexts = [
+  // Define conversation messages in Animal Crossing style
+  const conversationMessages = [
     "Welcome to the Horny Forest, traveler! I'm Shroomy, your guide to this mystical realm of kawaii creatures and degen opportunities.",
     "The prophecy speaks of great wealth for those who HODL the sacred $HORNY token through the next bull market...",
-    "Let me show you around our community and the incredible tokenomics of $HORNY."
+    "Let me show you around our community and the incredible tokenomics of $HORNY.",
+    "We're going to make it, fren!"
   ];
   
-  const { displayedText, showCursor, isTyping, currentTextIndex } = useTypingAnimation(
-    conversationTexts, 
-    30, // typing speed in ms
-    1000 // delay between texts in ms
-  );
+  // Generate the Shroomy character SVG as a data URL
+  useEffect(() => {
+    const svgElement = document.createElement('div');
+    svgElement.innerHTML = '<svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="#3C7DD9" /><circle cx="50" cy="50" r="35" fill="#4E8FE8" /><path d="M50 10 L55 25 L45 25 Z" fill="#2C5AA0" /><path d="M80 30 L65 40 L70 25 Z" fill="#2C5AA0" /><path d="M90 50 L75 50 L80 40 Z" fill="#2C5AA0" /><path d="M80 70 L65 60 L70 75 Z" fill="#2C5AA0" /><path d="M50 90 L55 75 L45 75 Z" fill="#2C5AA0" /><path d="M20 70 L35 60 L30 75 Z" fill="#2C5AA0" /><path d="M10 50 L25 50 L20 40 Z" fill="#2C5AA0" /><path d="M20 30 L35 40 L30 25 Z" fill="#2C5AA0" /><path d="M35 65 C35 75, 65 75, 65 65 L63 85 C63 92, 37 92, 37 85 Z" fill="#F0EAD6" /><circle cx="42" cy="50" r="5" fill="#000" /><circle cx="58" cy="50" r="5" fill="#000" /><circle cx="44" cy="48" r="2" fill="#FFF" /><circle cx="60" cy="48" r="2" fill="#FFF" /><path d="M45 60 Q50 65 55 60" stroke="#000" stroke-width="2" stroke-linecap="round" /></svg>';
+    
+    const svgString = svgElement.innerHTML;
+    const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+    setShroomyCharacterSvg(dataUrl);
+  }, []);
   
   // Start conversation when component mounts
   useEffect(() => {
@@ -88,29 +41,11 @@ export default function ForestGate() {
     return () => clearTimeout(timer);
   }, []);
   
-  // Show content after conversation finishes or after a timeout
-  useEffect(() => {
-    if (!isTyping && currentTextIndex === conversationTexts.length - 1) {
-      // Conversation finished, show content after delay
-      const timer = setTimeout(() => {
-        setShowContent(true);
-      }, 1000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [isTyping, currentTextIndex, conversationTexts.length]);
-  
-  // Fallback to show content after 15 seconds
-  useEffect(() => {
-    const fallbackTimer = setTimeout(() => {
-      if (!showContent) {
-        setShowContent(true);
-      }
-    }, 15000);
-    
-    return () => clearTimeout(fallbackTimer);
-  }, [showContent]);
-  
+  // Handle when dialog is complete
+  const handleDialogComplete = () => {
+    setShowContent(true);
+  };
+
   return (
     <ParallaxBackground
       imageUrl="/src/assets/images/forest_gate_bg.png"
@@ -128,30 +63,23 @@ export default function ForestGate() {
         </motion.div>
         
         <div className="max-w-4xl mx-auto">
-          {/* Typing animation dialog */}
+          {/* Animal Crossing style dialog */}
           {showConversation && (
-            <RetroDialog className="mb-8" withAnimation variant="light">
-              <div className="min-h-[120px]">
-                <p className="font-body text-xl">
-                  "{displayedText}
-                  {showCursor && <span className="animate-pulse">|</span>}
-                </p>
-              </div>
-              
-              {/* Skip button - only shows while typing is happening */}
-              {isTyping && (
-                <div className="text-right mt-4">
-                  <button 
-                    className="text-sm text-darkBrown opacity-70 hover:opacity-100 transition-opacity"
-                    onClick={() => {
-                      setShowContent(true);
-                    }}
-                  >
-                    [Skip →]
-                  </button>
-                </div>
-              )}
-            </RetroDialog>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-8 max-w-2xl mx-auto"
+            >
+              <AnimalCrossingDialog
+                messages={conversationMessages}
+                characterImage={shroomyCharacterSvg}
+                characterName="Shroomy"
+                onComplete={handleDialogComplete}
+                typingSpeed={40}
+                delayBetweenMessages={1200}
+              />
+            </motion.div>
           )}
           
           {/* Content appears after conversation completes */}
