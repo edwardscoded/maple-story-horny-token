@@ -8,7 +8,7 @@ import fungusFrameworkBg from '../assets/images/backgrounds/fungus_framework_bg.
 export default function FungusFramework() {
   const [copySuccess, setCopySuccess] = useState(false);
   
-  const contractAddress = "0x69420...HORNY";
+  const contractAddress = "0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922";
   
   const copyToClipboard = () => {
     navigator.clipboard.writeText(contractAddress)
