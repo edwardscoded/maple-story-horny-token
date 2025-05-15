@@ -84,21 +84,7 @@ export default function SacredTree() {
             </AnimatePresence>
           </div>
           
-          {/* Cute mushroom decorations */}
-          <div className="flex justify-between mt-12">
-            {/* A small blue mushroom character with a cheerful expression */}
-            <img 
-              src="https://pixabay.com/get/gc19d1e58c96b65c29083c72344a219ce3f238ce5d34b2287625e033768af3b49048ac5438524c348172a9ed8fcac763cebeb7eee2324736c41907c7b27cbfa16_1280.jpg" 
-              alt="Cute mushroom character" 
-              className="w-16 h-16 object-contain" 
-            />
-            {/* A small pink mushroom character with blushing cheeks */}
-            <img 
-              src="https://images.unsplash.com/photo-1640271443625-3276ed8f62b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150" 
-              alt="Cute mushroom character" 
-              className="w-16 h-16 object-contain" 
-            />
-          </div>
+          {/* Decorative elements removed as requested */}
         </div>
       </div>
     </ParallaxBackground>
