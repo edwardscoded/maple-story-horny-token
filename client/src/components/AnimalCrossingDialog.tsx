@@ -123,11 +123,16 @@ export const AnimalCrossingDialog: React.FC<AnimalCrossingDialogProps> = ({
         {/* Character info section - top of dialog */}
         <div className="flex items-center mb-4 bg-[#f8f4e3] p-2 rounded-lg border-2 border-brown">
           {characterImage && (
-            <div className="w-24 h-24 overflow-hidden mr-3 bg-transparent flex-shrink-0 p-1">
+            <div className="w-28 h-28 overflow-hidden mr-3 bg-transparent flex-shrink-0 p-1 relative">
               <img 
                 src={characterImage} 
                 alt={characterName} 
                 className="w-full h-full object-contain"
+                style={{ 
+                  imageRendering: 'pixelated',
+                  transform: 'scale(1.1)',
+                  filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.1))'
+                }}
                 onError={(e) => {
                   console.error('Image failed to load:', characterImage);
                   e.currentTarget.src = 'https://placehold.co/100x100/FFEEDD/brown?text=Shroomy';
