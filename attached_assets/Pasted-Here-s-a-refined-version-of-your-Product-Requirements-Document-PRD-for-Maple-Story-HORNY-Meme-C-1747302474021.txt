@@ -1,0 +1,121 @@
+Here’s a refined version of your Product Requirements Document (PRD) for Maple Story — $HORNY Meme Coin on AVAX. The structure remains intact, but I’ve streamlined the language, clarified objectives, removed redundant details, and enhanced professionalism while preserving the playful tone. I’ve also added specificity where needed and ensured alignment with the project’s unique vibe.
+Product Requirements Document
+Project: Maple Story — $HORNY Meme Coin on AVAX
+Version: 1.0
+Date: May 15, 2025  
+1. Overview
+Maple Story is a kawaii-inspired meme coin on the Avalanche (AVAX) blockchain, blending nostalgic RPG aesthetics with a provocative, community-driven narrative. Set in a whimsical forest of horny mushrooms, $HORNY captures the chaotic energy of meme culture, early internet RPGs, and bull market fervor. The website serves as the central hub to engage a cult-like community through lore, memes, and token interaction.
+Blockchain: Avalanche (AVAX)  
+
+Token Ticker: $HORNY  
+
+Objective: Build a degenerate yet wholesome community driven by nostalgia, humor, and financial ambition.
+2. Target Audience
+AVAX-based meme coin traders and degens  
+
+Fans of nostalgic games (e.g., MapleStory)  
+
+Shitcoin enthusiasts chasing viral pumps  
+
+Terminally online users seeking quirky, cult-like communities
+3. Design Requirements
+ Aesthetic
+Color Palette: AVAX Red (#E84142), beige tones, soft pastel gradients  
+
+Typography: Retro pixel fonts (e.g., Press Start 2P) or RPG-style serif (e.g., UnifrakturCook)  
+
+Mascot: Blue mushroom (inspired by MapleStory or an AI-generated parody)  
+
+Layout: Scroll-to-reveal storytelling, retro RPG menus, hover effects, parallax forest backgrounds
+ Visuals
+Chibi-style mushroom characters with subtle, SFW suggestive elements  
+
+Animated red maple leaves falling across the screen  
+
+Downloadable stickers, GIFs, and meme-ready assets for community sharing
+4. Core Pages & Features
+ Home (The Forest Gate)
+Animated mascot intro: “Welcome to the Horny Forest”  
+
+Real-time $HORNY price feed and chart (via DexScreener or Birdeye API)  
+
+Prominent “Buy $HORNY” CTA linking to TraderJoe (AVAX DEX)
+ Lore Page (The Sacred Tree)
+Interactive, scroll-based narrative detailing:  
+Origin of the Horny Mushroom  
+
+Prophecy of the Great Maple Pump  
+
+Tragedy of the Coomers and rise of the $HORNY cult
+Parallax effects to enhance storytelling
+ Community Page (The Mushroom Circle)
+Embedded X feed and Telegram link for real-time engagement  
+
+Gallery of shareable, community-created memes  
+
+Leaderboard showcasing top $HORNY holders (“Bagholder Shrine”)
+ Tokenomics Page (The Spores of Wealth)
+Clear breakdown of:  
+Total token supply  
+
+Liquidity pool (LP) details  
+
+Burn mechanism (if applicable)
+Community-voted tax structure (e.g., no tax or high tax)  
+
+Dynamic visual of a tree growing leaves as market cap increases
+ Tech Page (The Fungus Framework)
+Display $HORNY contract address  
+
+Link to audits (if available)  
+
+Overview of AVAX benefits (speed, low fees, snow-themed synergy)
+ Easter Egg
+Clicking the mushroom’s blush 69 times unlocks a blurred NSFW shrine  
+
+Age/consent verification required to access
+5. Technical Stack
+Frontend: Next.js or Vite + React for fast, interactive UI  
+
+Backend: Serverless architecture (Vercel or Netlify)  
+
+Styling: TailwindCSS with custom pixel-art components  
+
+Blockchain: Avalanche C-Chain for token deployment and interaction  
+
+APIs:  
+Price/Chart: DexScreener, Birdeye, or CoinGecko  
+
+Social: X API for community feed integration
+6. User Flow
+User lands on homepage → animated mushroom greets with falling maple leaves  
+
+“Read the Horny Story” CTA initiates lore scroll  
+
+Progressive storytelling reveals cult narrative  
+
+Prompts to join Telegram, buy $HORNY, or explore community  
+
+Hidden interactions (e.g., easter egg) unlock deeper site engagement
+7. Success Metrics
+Traffic: 10,000+ website visits in the first month  
+
+Holders: 5,000+ $HORNY wallet holders  
+
+Social Reach: 1M+ impressions on X via memes and community posts  
+
+Cultural Impact: At least one community-driven documentary or viral video (stretch goal)
+8. Optional Features
+Maple Shrine NFT Mint: Unique avatars that evolve based on $HORNY holding duration  
+
+Horny Score: Gamified metric rewarding users for holding (non-selling)  
+
+Maple Quest Mini-Game: Embedded idle game with turn-based RPG mechanics
+9. Notes
+Ensure all NSFW elements remain subtle and SFW-compliant to avoid platform bans.  
+
+Community feedback should guide tokenomics (e.g., tax structure) to maximize engagement.  
+
+Prioritize mobile optimization for seamless degen access on the go.
+This refined PRD maintains the quirky essence of $HORNY while improving clarity, specificity, and professionalism. Let me know if you’d like further tweaks or additional sections!
+
