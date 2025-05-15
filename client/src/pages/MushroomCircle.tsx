@@ -4,6 +4,7 @@ import { PixelButton } from '@/components/PixelButton';
 import { PixelBorder } from '@/components/ui/pixel-border';
 import { ParallaxBackground } from '@/components/ParallaxBackground';
 import { useQuery } from '@tanstack/react-query';
+import mushroomCircleBg from '../assets/images/backgrounds/mushroom_circle_bg.png';
 
 interface Holder {
   id: number;
@@ -29,8 +30,8 @@ export default function MushroomCircle() {
   
   return (
     <ParallaxBackground
-      imageUrl="https://images.unsplash.com/photo-1516214104703-d870798883c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080"
-      className="px-4 py-16"
+      imageUrl={mushroomCircleBg}
+      className="px-4 py-16 min-h-screen"
     >
       <div className="container mx-auto relative z-10">
         <motion.div 
