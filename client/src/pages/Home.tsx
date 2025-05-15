@@ -18,26 +18,36 @@ export default function Home() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-beige px-4 py-16">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16">
+      {/* Background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center z-0" 
+        style={{ 
+          backgroundImage: "url('/src/assets/images/horny_mushroom_bg.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover"
+        }}
+      />
+      
+      {/* Semi-transparent overlay for better text readability */}
+      <div className="absolute inset-0 bg-black bg-opacity-20 z-0"></div>
+      
+      {/* Main content */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="z-10 text-center"
+        className="z-10 text-center p-6 rounded-lg bg-white bg-opacity-80 backdrop-blur-sm shadow-lg"
       >
         <h1 className="font-pixel text-avaxRed text-2xl md:text-4xl mb-4">Maple Story</h1>
         <div className="font-rpg text-4xl md:text-6xl mb-8 text-darkBrown">$HORNY</div>
-        <p className="font-body text-xl md:text-2xl mb-8 max-w-xl mx-auto">
+        <p className="font-body text-xl md:text-2xl mb-8 max-w-xl mx-auto text-darkBrown">
           A kawaii-inspired meme coin on the AVAX blockchain.
         </p>
         
-        {/* Main mushroom mascot */}
-        <div className="relative mx-auto w-48 h-48 mb-6 animate-float cursor-pointer" onClick={handleMascotClick}>
-          <img 
-            src="https://pixabay.com/get/g71724161ea3495d96a9c8071a0e9f5085f8844787167a1a20a043a2d84ecb86be45291626e9c8e961e38e1504492b9456e91a310069b71f7fb984a392f7a3e92_1280.jpg"
-            alt="Horny Mushroom Mascot" 
-            className="w-full h-full object-contain rounded-full" 
-          />
+        {/* No need for external mascot image as it's already in our background */}
+        <div className="relative mx-auto w-48 h-48 mb-6 cursor-pointer" onClick={handleMascotClick}>
+          {/* Counter will still be shown when clicking */}
           {clickCount > 0 && (
             <span className="absolute top-0 right-0 bg-avaxRed text-white font-pixel text-xs px-2 py-1 rounded-full">
               {clickCount}/69
