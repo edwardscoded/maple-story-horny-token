@@ -1,13 +1,30 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { PixelButton } from '@/components/PixelButton';
 import { PixelBorder } from '@/components/ui/pixel-border';
 import { ParallaxBackground } from '@/components/ParallaxBackground';
+import { useQuery } from '@tanstack/react-query';
+
+interface Holder {
+  id: number;
+  rank: number;
+  wallet: string;
+  amount: string;
+  status: string;
+}
 
 export default function MushroomCircle() {
-  const topHolders = [
-    { rank: 1, wallet: "0xDEAD...BEEF", amount: "69,420,000", status: "Mushroom King" },
-    { rank: 2, wallet: "0xABCD...1234", amount: "42,069,000", status: "Elder Shroom" },
-    { rank: 3, wallet: "0xMEME...COIN", amount: "8,008,135", status: "Horny Degen" },
+  // Fetch holders from API
+  const { data: holders, isLoading, error } = useQuery<Holder[]>({
+    queryKey: ['/api/holders'],
+    retry: 1,
+  });
+  
+  // Fallback data in case API fails
+  const fallbackHolders = [
+    { id: 1, rank: 1, wallet: "0x3efe...2922", amount: "69,420,000", status: "Mushroom King" },
+    { id: 2, rank: 2, wallet: "0xABCD...1234", amount: "42,069,000", status: "Elder Shroom" },
+    { id: 3, rank: 3, wallet: "0xDEAD...BEEF", amount: "8,008,135", status: "Horny Degen" },
   ];
   
   return (
@@ -103,38 +120,52 @@ export default function MushroomCircle() {
             <PixelBorder>
               <h3 className="font-pixel text-darkBrown text-lg mb-4">Bagholder Shrine</h3>
               <div className="bg-white p-4">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full">
-                    <thead>
-                      <tr>
-                        <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">Rank</th>
-                        <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">Wallet</th>
-                        <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">$HORNY Held</th>
-                        <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topHolders.map((holder, index) => (
-                        <tr key={index} className={index % 2 === 1 ? "bg-gray-50" : ""}>
-                          <td className="px-4 py-2 font-body">#{holder.rank}</td>
-                          <td className="px-4 py-2 font-mono text-sm">{holder.wallet}</td>
-                          <td className="px-4 py-2 font-body">{holder.amount}</td>
-                          <td className="px-4 py-2">
-                            <span 
-                              className={`px-2 py-1 rounded text-xs text-white ${
-                                holder.status === "Mushroom King" ? "bg-forestGreen" :
-                                holder.status === "Elder Shroom" ? "bg-avaxRed" :
-                                "bg-mushroomPink"
-                              }`}
-                            >
-                              {holder.status}
-                            </span>
-                          </td>
+                {isLoading ? (
+                  <div className="flex justify-center py-8">
+                    <div className="w-10 h-10 border-4 border-avaxRed border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                ) : error ? (
+                  <div className="text-center py-8 text-red-500">
+                    <p>Failed to load holders data</p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto max-h-[500px]">
+                    <table className="min-w-full">
+                      <thead className="sticky top-0 bg-white z-10">
+                        <tr>
+                          <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">Rank</th>
+                          <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">Wallet</th>
+                          <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">$HORNY Held</th>
+                          <th className="px-4 py-2 text-left font-pixel text-sm text-avaxRed">Status</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                      </thead>
+                      <tbody>
+                        {(holders || fallbackHolders).map((holder, index) => (
+                          <tr key={holder.id || index} className={index % 2 === 1 ? "bg-gray-50" : ""}>
+                            <td className="px-4 py-2 font-body">#{holder.rank}</td>
+                            <td className="px-4 py-2 font-mono text-sm">{holder.wallet}</td>
+                            <td className="px-4 py-2 font-body">{holder.amount}</td>
+                            <td className="px-4 py-2">
+                              <span 
+                                className={`px-2 py-1 rounded text-xs text-white ${
+                                  holder.status === "Mushroom King" ? "bg-forestGreen" :
+                                  holder.status === "Elder Shroom" ? "bg-avaxRed" :
+                                  holder.status === "Mushroom Knight" ? "bg-amber-600" :
+                                  holder.status === "Spore Guardian" ? "bg-indigo-600" :
+                                  holder.status === "Fungus Friend" ? "bg-emerald-600" :
+                                  holder.status === "Mycelium Member" ? "bg-cyan-600" :
+                                  "bg-mushroomPink"
+                                }`}
+                              >
+                                {holder.status}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             </PixelBorder>
           </motion.div>

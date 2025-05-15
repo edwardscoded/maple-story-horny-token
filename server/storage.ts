@@ -4,6 +4,8 @@ import {
   memes, type Meme, type InsertMeme,
   users, type User, type InsertUser
 } from "@shared/schema";
+import { db } from "./db";
+import { eq, desc, asc } from "drizzle-orm";
 
 // Interface for storage methods
 export interface IStorage {
@@ -26,153 +28,234 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
 }
 
-// In-memory storage implementation
-export class MemStorage implements IStorage {
-  private _holders: Map<number, Holder>;
-  private _priceHistory: Map<number, PriceHistory>;
-  private _memes: Map<number, Meme>;
-  private _users: Map<number, User>;
-  private currentHolderId: number;
-  private currentPriceId: number;
-  private currentMemeId: number;
-  private currentUserId: number;
-
-  constructor() {
-    this._holders = new Map();
-    this._priceHistory = new Map();
-    this._memes = new Map();
-    this._users = new Map();
-    this.currentHolderId = 1;
-    this.currentPriceId = 1;
-    this.currentMemeId = 1;
-    this.currentUserId = 1;
-    
-    // Initialize with mock data
-    this.initializeData();
-  }
-
-  private initializeData() {
-    // Add mock holders
-    this.addHolder({
-      wallet: "0xDEAD...BEEF",
-      amount: "69,420,000",
-      rank: 1,
-      status: "Mushroom King"
-    });
-    
-    this.addHolder({
-      wallet: "0xABCD...1234",
-      amount: "42,069,000",
-      rank: 2,
-      status: "Elder Shroom"
-    });
-    
-    this.addHolder({
-      wallet: "0xMEME...COIN",
-      amount: "8,008,135",
-      rank: 3,
-      status: "Horny Degen"
-    });
-    
-    // Add mock price history
-    this.addPricePoint({
-      price: "0.0000042069",
-      percentChange: "+69"
-    });
-    
-    // Add mock memes
-    this.addMeme({
-      imageUrl: "https://pixabay.com/get/gbce1c3cec4e31c8dd733bea3d1076dde33c400146d0afbb9b86e44781087fb40cf9226ee69c0e3cc38b842af1de609692781db0736f09cca32e8b13c52b308c1_1280.jpg",
-      title: "Trading Mushrooms",
-      creatorWallet: "0xDEAD...BEEF"
-    });
-    
-    this.addMeme({
-      imageUrl: "https://images.unsplash.com/photo-1612404730960-5c71577fca11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=300",
-      title: "Surprised Mushroom",
-      creatorWallet: "0xABCD...1234"
-    });
-  }
-
+// Database storage implementation
+export class DatabaseStorage implements IStorage {
   // Holder methods
   async getTopHolders(): Promise<Holder[]> {
-    return Array.from(this._holders.values())
-      .sort((a, b) => a.rank - b.rank);
+    return await db.select().from(holders).orderBy(asc(holders.rank));
   }
 
   async addHolder(holder: InsertHolder): Promise<Holder> {
-    const id = this.currentHolderId++;
-    const newHolder = { ...holder, id };
-    this._holders.set(id, newHolder);
+    const [newHolder] = await db.insert(holders).values(holder).returning();
     return newHolder;
   }
 
   // Price methods
   async getCurrentPrice(): Promise<PriceHistory | undefined> {
-    const prices = Array.from(this._priceHistory.values());
-    // Return the most recent price entry
-    return prices.sort((a, b) => 
-      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-    )[0];
+    const [latestPrice] = await db
+      .select()
+      .from(priceHistory)
+      .orderBy(desc(priceHistory.timestamp))
+      .limit(1);
+    return latestPrice;
   }
 
   async getPriceHistory(): Promise<PriceHistory[]> {
-    return Array.from(this._priceHistory.values())
-      .sort((a, b) => 
-        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
+    return await db
+      .select()
+      .from(priceHistory)
+      .orderBy(asc(priceHistory.timestamp));
   }
 
   async addPricePoint(price: InsertPriceHistory): Promise<PriceHistory> {
-    const id = this.currentPriceId++;
-    const newPrice = { 
-      ...price, 
-      id, 
-      timestamp: new Date() 
-    };
-    this._priceHistory.set(id, newPrice);
+    const [newPrice] = await db
+      .insert(priceHistory)
+      .values({ ...price, timestamp: new Date() })
+      .returning();
     return newPrice;
   }
 
   // Meme methods
   async getMemes(): Promise<Meme[]> {
-    return Array.from(this._memes.values())
-      .filter(meme => meme.approved)
-      .sort((a, b) => 
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
+    return await db
+      .select()
+      .from(memes)
+      .where(eq(memes.approved, true))
+      .orderBy(desc(memes.createdAt));
   }
 
   async addMeme(meme: InsertMeme): Promise<Meme> {
-    const id = this.currentMemeId++;
-    const newMeme = { 
-      ...meme, 
-      id, 
-      approved: true, 
-      createdAt: new Date() 
-    };
-    this._memes.set(id, newMeme);
+    const [newMeme] = await db
+      .insert(memes)
+      .values({ ...meme, approved: true, createdAt: new Date() })
+      .returning();
     return newMeme;
   }
 
-  // User methods from template
+  // User methods
   async getUser(id: number): Promise<User | undefined> {
-    return this._users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this._users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
   }
 
   async createUser(user: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const newUser = { ...user, id };
-    this._users.set(id, newUser);
+    const [newUser] = await db.insert(users).values(user).returning();
     return newUser;
   }
 }
 
-// Export a singleton instance
-export const storage = new MemStorage();
+// Initialize the database with initial data
+async function seedDatabase() {
+  const holderCount = await db.select().from(holders).execute();
+  
+  // Only seed if the database is empty
+  if (holderCount.length === 0) {
+    // Add initial holders (top 20)
+    await db.insert(holders).values([
+      {
+        wallet: "0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922",
+        amount: "69,420,000",
+        rank: 1,
+        status: "Mushroom King"
+      },
+      {
+        wallet: "0xABCD1234ABCD1234ABCD1234ABCD1234",
+        amount: "42,069,000",
+        rank: 2,
+        status: "Elder Shroom"
+      },
+      {
+        wallet: "0xDEADBEEFDEADBEEFDEADBEEFDEADBEEF",
+        amount: "8,008,135",
+        rank: 3,
+        status: "Horny Degen"
+      },
+      {
+        wallet: "0x1111222233334444555566667777888",
+        amount: "6,942,069",
+        rank: 4,
+        status: "Mushroom Knight"
+      },
+      {
+        wallet: "0x8888777766665555444433332222111",
+        amount: "4,200,690",
+        rank: 5,
+        status: "Mushroom Knight"
+      },
+      {
+        wallet: "0xAAAABBBBCCCCDDDDEEEEFFFF123456",
+        amount: "3,141,592",
+        rank: 6,
+        status: "Horny Degen"
+      },
+      {
+        wallet: "0x654321FEEEDDDCCCBBBAAA9876543",
+        amount: "2,718,281",
+        rank: 7,
+        status: "Horny Degen"
+      },
+      {
+        wallet: "0xAVAX1AVAX2AVAX3AVAX4AVAX5AVAX6",
+        amount: "1,618,033",
+        rank: 8,
+        status: "Spore Guardian"
+      },
+      {
+        wallet: "0xMAKER1MAKER2MAKER3MAKER4MAKER5",
+        amount: "1,414,213",
+        rank: 9,
+        status: "Spore Guardian"
+      },
+      {
+        wallet: "0xHORNY1HORNY2HORNY3HORNY4HORNY5",
+        amount: "1,234,567",
+        rank: 10,
+        status: "Spore Guardian"
+      },
+      {
+        wallet: "0xMEME1MEME2MEME3MEME4MEME5MEME6",
+        amount: "1,111,111",
+        rank: 11,
+        status: "Fungus Friend"
+      },
+      {
+        wallet: "0xCOIN1COIN2COIN3COIN4COIN5COIN6",
+        amount: "1,010,101",
+        rank: 12,
+        status: "Fungus Friend"
+      },
+      {
+        wallet: "0xTOKEN1TOKEN2TOKEN3TOKEN4TOKEN5",
+        amount: "987,654",
+        rank: 13,
+        status: "Fungus Friend"
+      },
+      {
+        wallet: "0xAVAX888AVAX888AVAX888AVAX888",
+        amount: "867,530",
+        rank: 14,
+        status: "Fungus Friend"
+      },
+      {
+        wallet: "0xDEGEN777DEGEN777DEGEN777DEGEN",
+        amount: "789,456",
+        rank: 15,
+        status: "Mycelium Member"
+      },
+      {
+        wallet: "0xFUNGI666FUNGI666FUNGI666FUNGI",
+        amount: "753,159",
+        rank: 16,
+        status: "Mycelium Member"
+      },
+      {
+        wallet: "0xMAPLE555MAPLE555MAPLE555MAPLE",
+        amount: "666,666",
+        rank: 17,
+        status: "Mycelium Member"
+      },
+      {
+        wallet: "0xSHROOM444SHROOM444SHROOM444",
+        amount: "424,242",
+        rank: 18,
+        status: "Mycelium Member"
+      },
+      {
+        wallet: "0xSPORE333SPORE333SPORE333SPORE",
+        amount: "333,333",
+        rank: 19,
+        status: "Mycelium Member"
+      },
+      {
+        wallet: "0xFOREST222FOREST222FOREST222",
+        amount: "222,222",
+        rank: 20,
+        status: "Mycelium Member"
+      }
+    ]);
+    
+    // Add initial price point
+    await db.insert(priceHistory).values({
+      price: "0.0000042069",
+      percentChange: "+69",
+      timestamp: new Date()
+    });
+    
+    // Add initial memes
+    await db.insert(memes).values([
+      {
+        imageUrl: "https://pixabay.com/get/gbce1c3cec4e31c8dd733bea3d1076dde33c400146d0afbb9b86e44781087fb40cf9226ee69c0e3cc38b842af1de609692781db0736f09cca32e8b13c52b308c1_1280.jpg",
+        title: "Trading Mushrooms",
+        creatorWallet: "0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922",
+        approved: true,
+        createdAt: new Date()
+      },
+      {
+        imageUrl: "https://images.unsplash.com/photo-1612404730960-5c71577fca11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=300",
+        title: "Surprised Mushroom",
+        creatorWallet: "0xABCD...1234",
+        approved: true,
+        createdAt: new Date()
+      }
+    ]);
+  }
+}
+
+// Seed the database and export a singleton instance
+seedDatabase().catch(console.error);
+export const storage = new DatabaseStorage();
