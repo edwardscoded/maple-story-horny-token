@@ -15,8 +15,11 @@ export default function Home() {
         if ((window as any).showNsfwShrine) {
           (window as any).showNsfwShrine();
         }
-        setShowAchievement(true);
-        setTimeout(() => setShowAchievement(false), 3000);
+        // Use setTimeout to avoid the setState during render warning
+        setTimeout(() => {
+          setShowAchievement(true);
+          setTimeout(() => setShowAchievement(false), 3000);
+        }, 0);
       }
       return newCount;
     });
@@ -61,8 +64,11 @@ export default function Home() {
       
       {/* Clickable area over the mushroom in the background */}
       <div 
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/3 z-10 w-40 h-40 cursor-pointer"
+        className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-40 h-40 cursor-pointer"
         onClick={handleMascotClick}
+        style={{
+          borderRadius: "50%"
+        }}
       >
         {clickCount > 0 && (
           <span className="absolute top-0 right-0 bg-avaxRed text-white font-pixel text-xs px-2 py-1 rounded-full">
