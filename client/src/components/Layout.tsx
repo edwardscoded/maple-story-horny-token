@@ -61,31 +61,29 @@ export default function Layout({ children }: LayoutProps) {
         }`}
       >
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link href="/">
-            <a className="flex items-center gap-2">
-              <div className={`font-pixel ${scrolled ? 'text-avaxRed' : 'text-avaxRed'} text-lg`}>
-                $HORNY
-              </div>
-            </a>
+          <Link href="/" className="flex items-center gap-2">
+            <div className={`font-pixel ${scrolled ? 'text-avaxRed' : 'text-avaxRed'} text-lg`}>
+              $HORNY
+            </div>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
             {menuItems.map((item) => (
-              <Link key={item.path} href={item.path}>
-                <a 
-                  className={`font-pixel text-xs py-1 border-b-2 ${
-                    location === item.path 
-                    ? 'border-avaxRed text-avaxRed' 
-                    : `${scrolled ? 'border-transparent text-beige hover:text-avaxRed' : 'border-transparent hover:text-avaxRed'}`
-                  }`}
-                >
-                  {item.name}
-                </a>
+              <Link 
+                key={item.path} 
+                href={item.path}
+                className={`font-pixel text-xs py-1 border-b-2 ${
+                  location === item.path 
+                  ? 'border-avaxRed text-avaxRed' 
+                  : `${scrolled ? 'border-transparent text-beige hover:text-avaxRed' : 'border-transparent hover:text-avaxRed'}`
+                }`}
+              >
+                {item.name}
               </Link>
             ))}
             <a 
-              href="https://traderjoexyz.com" 
+              href="https://arena.trade/token/0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922" 
               target="_blank" 
               rel="noopener noreferrer"
               className={`font-pixel text-xs py-1 px-3 bg-avaxRed text-white hover:bg-opacity-90 shadow-md transition-all`}
@@ -118,21 +116,21 @@ export default function Layout({ children }: LayoutProps) {
             >
               <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
                 {menuItems.map((item) => (
-                  <Link key={item.path} href={item.path}>
-                    <a 
-                      className={`font-pixel text-sm py-2 ${
-                        location === item.path 
-                        ? 'text-avaxRed' 
-                        : 'text-beige hover:text-avaxRed'
-                      }`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </a>
+                  <Link 
+                    key={item.path} 
+                    href={item.path}
+                    className={`font-pixel text-sm py-2 ${
+                      location === item.path 
+                      ? 'text-avaxRed' 
+                      : 'text-beige hover:text-avaxRed'
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
                   </Link>
                 ))}
                 <a 
-                  href="https://traderjoexyz.com" 
+                  href="https://arena.trade/token/0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="font-pixel text-sm py-2 px-4 bg-avaxRed text-white hover:bg-opacity-90 text-center shadow-md"

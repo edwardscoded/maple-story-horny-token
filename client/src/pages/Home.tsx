@@ -10,8 +10,8 @@ export default function Home() {
     setClickCount(prev => {
       const newCount = prev + 1;
       // When reaching 69, trigger easter egg
-      if (newCount === 69 && window.showNsfwShrine) {
-        window.showNsfwShrine();
+      if (newCount === 69 && (window as any).showNsfwShrine) {
+        (window as any).showNsfwShrine();
       }
       return newCount;
     });
@@ -48,7 +48,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-center gap-4 mt-6">
           <PixelButton href="/forest-gate">Enter The Forest</PixelButton>
           <PixelButton 
-            href="https://traderjoexyz.com" 
+            href="https://arena.trade/token/0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922" 
             external={true}
             variant="forest"
           >

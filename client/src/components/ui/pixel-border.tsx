@@ -6,6 +6,7 @@ interface PixelBorderProps {
   className?: string;
   padding?: boolean;
   withShadow?: boolean;
+  id?: string;
 }
 
 export function PixelBorder({ 
@@ -13,9 +14,11 @@ export function PixelBorder({
   className,
   padding = true,
   withShadow = true,
+  id
 }: PixelBorderProps) {
   return (
     <div 
+      id={id}
       className={cn(
         "border-4 border-darkBrown relative", 
         withShadow && "shadow-[4px_4px_0_rgba(61,40,23,0.8)]",

@@ -82,14 +82,14 @@ export default function ForestGate() {
               <div className="space-y-4">
                 <div className="bg-white p-4">
                   <p className="font-body text-lg mb-2">Token Contract:</p>
-                  <p className="font-mono text-sm bg-gray-100 p-2 rounded overflow-x-auto">0x42069...HORNY</p>
+                  <p className="font-mono text-sm bg-gray-100 p-2 rounded overflow-x-auto">0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922</p>
                 </div>
                 <PixelButton 
-                  href="https://traderjoexyz.com" 
+                  href="https://arena.trade/token/0x3efeae3c9183f14f3baaaaf964f6e43e2f7a2922" 
                   external={true}
                   size="full"
                 >
-                  Buy on TraderJoe
+                  Buy on Arena
                 </PixelButton>
                 <p className="text-sm text-gray-600 text-center mt-2">Always DYOR. This is not financial advice.</p>
               </div>
