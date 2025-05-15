@@ -5,13 +5,6 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        'pixel': ['Silkscreen', 'cursive'], 
-        'body': ['Poppins', 'sans-serif'],
-        'rpg': ['Press Start 2P', 'cursive'],
-        'kawaii': ['Bubblegum Sans', 'cursive'],
-        'cute': ['Baloo 2', 'cursive']
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
