@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { PixelBorder } from '@/components/ui/pixel-border';
 import { ParallaxBackground } from '@/components/ParallaxBackground';
 import { toast } from '@/hooks/use-toast';
+import fungusFrameworkBg from '../assets/images/backgrounds/fungus_framework_bg.png';
 
 export default function FungusFramework() {
   const [copySuccess, setCopySuccess] = useState(false);
@@ -50,9 +51,9 @@ export default function FungusFramework() {
   
   return (
     <ParallaxBackground
-      imageUrl="https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080"
-      className="px-4 py-16"
-      opacity={0.4}
+      imageUrl={fungusFrameworkBg}
+      className="px-4 py-16 min-h-screen"
+      opacity={0.9}
     >
       <div className="container mx-auto relative z-10">
         <motion.div 
